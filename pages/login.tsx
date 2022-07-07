@@ -3,16 +3,14 @@ import {
 } from "next";
 
 import {
-  Button, Container, Typography
+  Button, Typography
 } from "@mui/material";
 
 const Login: NextPage = () =>  {
-  return (
-    <Container>
+  return <>
       <Typography>Hello! You are in Login page!</Typography>
       <Button>Click me!</Button>
-    </Container>
-  );
+  </>
 }
 
 export default Login
