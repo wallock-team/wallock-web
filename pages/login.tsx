@@ -5,21 +5,28 @@ import GoogleIcon from '@mui/icons-material/Google';
 
 import Logo from "../components/logo";
 
-const Login: NextPage = () =>  {
-  return <>
-    
-    <CenterPositioned>
-      <Logo />
-    </CenterPositioned>
+export const getStaticProps = async () => {
+  return {
+    props: {
+      apiUrl: process.env.API_URL
+    }
+  }
+}
 
-    <Button
-      fullWidth
-      variant="contained"
-      startIcon={<GoogleIcon />}
-    >
-      Log in with Google
-    </Button>
-  </>
+const Login: NextPage = (props) =>  {
+  return (
+    <>
+      <CenterPositioned>
+        <Logo />
+      </CenterPositioned>
+
+      <div>{props.apiUrl}</div>
+
+      <Button fullWidth variant="contained" startIcon={<GoogleIcon />}>
+        Log in with Google
+      </Button>
+    </>
+  );
 }
 
 const CenterPositioned = ({ children }: { children: ReactNode }) => {
