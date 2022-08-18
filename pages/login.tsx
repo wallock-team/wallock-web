@@ -1,43 +1,56 @@
-import { ReactNode } from "react";
-import { NextPage } from "next";
-import { Button } from "@mui/material";
+import { ReactNode } from 'react';
+import { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
+import { Button } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 
-import Logo from "../components/logo";
+import Logo from '../components/logo';
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
-      apiUrl: process.env.API_URL
-    }
-  }
-}
+      baseUrl: process.env.BASE_URL,
+      backendBaseUrl: process.env.BACKEND_URL,
+    },
+  };
+};
 
-const Login: NextPage = (props) =>  {
+const Login: NextPage = ({
+  baseUrl,
+  backendBaseUrl,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <CenterPositioned>
         <Logo />
       </CenterPositioned>
 
-      <div>{props.apiUrl}</div>
-
-      <Button fullWidth variant="contained" startIcon={<GoogleIcon />}>
+      <Button
+        fullWidth
+        variant="contained"
+        startIcon={<GoogleIcon />}
+        onClick={redirectToGoogleLogin}
+      >
         Log in with Google
       </Button>
     </>
   );
-}
+
+  function redirectToGoogleLogin() {
+    window.location.href = `${backendBaseUrl}/auth/login/social-login/google?authorized_uri=${baseUrl}`;
+  }
+};
 
 const CenterPositioned = ({ children }: { children: ReactNode }) => {
-  return <div
-    style={{
-      display: 'flex',
-      justifyContent: 'center',
-    }}
-  >
-    {children}
-  </div>;
-}
+  return (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+      }}
+    >
+      {children}
+    </div>
+  );
+};
 
-export default Login
+export default Login;
