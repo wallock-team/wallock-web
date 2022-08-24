@@ -1,18 +1,18 @@
-import { ReactNode } from 'react';
-import { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
-import { Button } from '@mui/material';
-import GoogleIcon from '@mui/icons-material/Google';
+import { ReactNode } from 'react'
+import { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next'
+import { Button } from '@mui/material'
+import GoogleIcon from '@mui/icons-material/Google'
 
-import Logo from '../components/logo';
+import Logo from '../components/logo'
 
 export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       baseUrl: process.env.BASE_URL,
-      backendBaseUrl: process.env.BACKEND_URL,
+      backendBaseUrl: process.env.BACKEND_BASE_URL,
     },
-  };
-};
+  }
+}
 
 const Login: NextPage = ({
   baseUrl,
@@ -26,19 +26,19 @@ const Login: NextPage = ({
 
       <Button
         fullWidth
-        variant="contained"
+        variant='contained'
         startIcon={<GoogleIcon />}
         onClick={redirectToGoogleLogin}
       >
         Log in with Google
       </Button>
     </>
-  );
+  )
 
   function redirectToGoogleLogin() {
-    window.location.href = `${backendBaseUrl}/auth/login/social-login/google?authorized_uri=${baseUrl}`;
+    window.location.href = `${backendBaseUrl}/auth/login/social-login/google?authorized_uri=${baseUrl}`
   }
-};
+}
 
 const CenterPositioned = ({ children }: { children: ReactNode }) => {
   return (
@@ -50,7 +50,7 @@ const CenterPositioned = ({ children }: { children: ReactNode }) => {
     >
       {children}
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login
