@@ -1,29 +1,16 @@
-import {
-  Avatar,
-  Button,
-  Container,
-  Grid,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  Paper,
-  Typography,
-} from '@mui/material'
-import ImageIcon from '@mui/icons-material/Image'
-import WorkIcon from '@mui/icons-material/Work'
-import BeachAccessIcon from '@mui/icons-material/BeachAccess'
+import { Button, Container, Grid, Typography } from '@mui/material'
 
 import { NextPage } from 'next'
 import { VictoryAxis, VictoryBar, VictoryChart } from 'victory'
 import BotNav from '../components/bot-nav'
+import TopCategoriesSpent from '../components/top-categories-spent'
 
 const Home: NextPage = () => {
   return (
     <Container>
       <Grid container justifyContent='space-between' sx={{ my: 2 }}>
         <Grid item xs='auto'>
-          <Typography variant='h5'>5.000.000</Typography>
+          <Typography variant='h5'>{(5000000).toLocaleString()}</Typography>
         </Grid>
 
         <Grid item xs='auto'>
@@ -31,57 +18,27 @@ const Home: NextPage = () => {
         </Grid>
       </Grid>
 
-      <Paper>
-        <Grid container>
-          <Grid item xs={12}>
-            <Typography variant='body1'>Total spent this month</Typography>
-            <VictoryChart domainPadding={{ x: 100 }}>
-              <VictoryBar
-                cornerRadius={8}
-                categories={{ x: ['Last month', 'This month'] }}
-                data={[
-                  { label: 'This month', spending: 1_000_000 },
-                  { label: 'Last month', spending: 900_000 },
-                ]}
-                x='label'
-                y='spending'
-              />
-              <VictoryAxis />
-            </VictoryChart>
-          </Grid>
-          <Grid item xs={12}>
-            <Typography variant='h6'>Top spending</Typography>
-            <List
-              sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
-            >
-              <ListItem>
-                <ListItemAvatar>
-                  <Avatar>
-                    <ImageIcon />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary='Photos' secondary='Jan 9, 2014' />
-              </ListItem>
-              <ListItem>
-                <ListItemAvatar>
-                  <Avatar>
-                    <WorkIcon />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary='Work' secondary='Jan 7, 2014' />
-              </ListItem>
-              <ListItem>
-                <ListItemAvatar>
-                  <Avatar>
-                    <BeachAccessIcon />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary='Vacation' secondary='July 20, 2014' />
-              </ListItem>
-            </List>
-          </Grid>
+      <Grid container>
+        <Grid item xs={12}>
+          <Typography variant='body1'>Total spent this month</Typography>
+          <VictoryChart domainPadding={{ x: 100 }}>
+            <VictoryBar
+              cornerRadius={8}
+              categories={{ x: ['Last month', 'This month'] }}
+              data={[
+                { label: 'This month', spending: 1_000_000 },
+                { label: 'Last month', spending: 900_000 },
+              ]}
+              x='label'
+              y='spending'
+            />
+            <VictoryAxis />
+          </VictoryChart>
         </Grid>
-      </Paper>
+        <Grid item xs={12}>
+          <TopCategoriesSpent transactions={fakeCategoriesReports} />
+        </Grid>
+      </Grid>
 
       <BotNav />
     </Container>
@@ -89,3 +46,48 @@ const Home: NextPage = () => {
 }
 
 export default Home
+
+const fakeCategoriesReports = [
+  {
+    id: 1,
+    isExpense: true,
+    amount: 1_000_000,
+    name: 'Category 1',
+    percentage: 10,
+  },
+  {
+    id: 2,
+    isExpense: true,
+    amount: 2_000_000,
+    name: 'Category 2',
+    percentage: 20,
+  },
+  {
+    id: 3,
+    isExpense: true,
+    amount: 3_000_000,
+    name: 'Category 3',
+    percentage: 30,
+  },
+  {
+    id: 4,
+    isExpense: true,
+    amount: 4_000_000,
+    name: 'Category 4',
+    percentage: 40,
+  },
+  {
+    id: 5,
+    isExpense: true,
+    amount: 5_000_000,
+    name: 'Category 5',
+    percentage: 50,
+  },
+  {
+    id: 6,
+    isExpense: true,
+    amount: 6_000_000,
+    name: 'Category 6',
+    percentage: 60,
+  },
+]
