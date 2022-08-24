@@ -1,7 +1,5 @@
 import {
   Avatar,
-  BottomNavigation,
-  BottomNavigationAction,
   Button,
   Container,
   Grid,
@@ -12,15 +10,13 @@ import {
   Paper,
   Typography,
 } from '@mui/material'
-import RestoreIcon from '@mui/icons-material/Restore'
-import FavoriteIcon from '@mui/icons-material/Favorite'
-import LocationOnIcon from '@mui/icons-material/LocationOn'
 import ImageIcon from '@mui/icons-material/Image'
 import WorkIcon from '@mui/icons-material/Work'
 import BeachAccessIcon from '@mui/icons-material/BeachAccess'
 
 import { NextPage } from 'next'
 import { VictoryAxis, VictoryBar, VictoryChart } from 'victory'
+import BotNav from '../components/bot-nav'
 
 const Home: NextPage = () => {
   return (
@@ -87,16 +83,7 @@ const Home: NextPage = () => {
         </Grid>
       </Paper>
 
-      <Paper
-        sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
-        elevation={3}
-      >
-        <BottomNavigation showLabels>
-          <BottomNavigationAction label='Recents' icon={<RestoreIcon />} />
-          <BottomNavigationAction label='Favorites' icon={<FavoriteIcon />} />
-          <BottomNavigationAction label='Nearby' icon={<LocationOnIcon />} />
-        </BottomNavigation>
-      </Paper>
+      <BotNav />
     </Container>
   )
 }
