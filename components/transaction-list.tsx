@@ -16,7 +16,8 @@ type Transaction = {
   id: number
   amount: number
   category: {
-    name: string
+    name: string,
+    expense: boolean
   }
   timestamp: Date
   note?: string
@@ -28,7 +29,7 @@ const TransactionList = (props: Props) => (
       <ListItem
         key={t.id}
         secondaryAction={
-          <Typography variant='body1'>{t.amount.toLocaleString()}</Typography>
+          <Typography variant='body1' sx={{ color: t.category.expense === true ? 'red':'green'}}>{t.amount.toLocaleString()}</Typography>
         }
       >
         <ListItemAvatar>
