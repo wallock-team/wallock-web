@@ -1,5 +1,4 @@
 import {
-  GetServerSideProps,
   GetServerSidePropsContext,
   GetServerSidePropsResult,
   PreviewData,
@@ -7,12 +6,30 @@ import {
 import { ParsedUrlQuery } from 'querystring'
 import { jwtVerify, importJWK } from 'jose'
 import googleOidcInfomation from './google-oidc-information'
+import jwt_decode from 'jwt-decode'
+
+type JwtHeader = {
+  alg: string
+  typ: string
+  kid: string
+}
 
 type User = {
   iss: string
   sub: string
-  [key: string]: any
+  iat: number
+  exp: number
+  [key: string]: unknown
 }
+
+type GetAuthenticatedServerSideProps<
+  P extends { [key: string]: any } = { [key: string]: any },
+  Q extends ParsedUrlQuery = ParsedUrlQuery,
+  D extends PreviewData = PreviewData
+> = (
+  context: GetServerSidePropsContext<Q, D>,
+  user: User
+) => Promise<GetServerSidePropsResult<P>>
 
 const withAuthenticatedUser = async <
   P extends { [key: string]: any } = { [key: string]: any },
@@ -20,9 +37,9 @@ const withAuthenticatedUser = async <
   D extends PreviewData = PreviewData
 >(
   context: GetServerSidePropsContext<Q, D>,
-  getServerSidePropsFunction?: GetServerSideProps<P & { user: User }, Q, D>
-): Promise<GetServerSidePropsResult<{ user: User }>> => {
-  const idToken = context.req.cookies.id_token
+  getServerSideProps?: GetAuthenticatedServerSideProps<P, Q, D>
+): Promise<GetServerSidePropsResult<P | { user: User }>> => {
+  const idToken = context.req.cookies?.id_token
   const user = await verify(idToken)
 
   if (!user) {
@@ -33,10 +50,14 @@ const withAuthenticatedUser = async <
       },
     }
   } else {
-    return {
-      props: {
-        user,
-      },
+    if (getServerSideProps) {
+      return await getServerSideProps(context, user)
+    } else {
+      return {
+        props: {
+          user,
+        },
+      }
     }
   }
 }
@@ -62,12 +83,9 @@ const verify = async (idToken?: string): Promise<User | false> => {
 }
 
 const decodeIdToken = (idToken: string) => {
-  const [header, payload, signature] = idToken.split('.')
-
   return {
-    header: JSON.parse(Buffer.from(header, 'base64').toString('utf-8')),
-    payload: JSON.parse(Buffer.from(payload, 'base64').toString('utf-8')),
-    signature,
+    header: jwt_decode<JwtHeader>(idToken, { header: true }),
+    payload: jwt_decode<User>(idToken),
   }
 }
 
