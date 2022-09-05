@@ -1,16 +1,27 @@
 import { Button, Container, Grid, Typography } from '@mui/material'
-
-import { NextPage } from 'next'
+import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from 'next'
 import { VictoryAxis, VictoryBar, VictoryChart } from 'victory'
 import BotNav from '../components/bot-nav'
 import TopCategoriesSpent from '../components/top-categories-spent'
+import withAuthenticatedUser from '../lib/auth'
 
-const Home: NextPage = () => {
+export const getServerSideProps: GetServerSideProps = async (context) =>
+  await withAuthenticatedUser(context, async (context, user) => {
+    return {
+      props: {
+        user,
+      },
+    }
+  })
+
+const Home: NextPage = (
+  props: InferGetServerSidePropsType<typeof getServerSideProps>
+) => {
   return (
     <Container>
       <Grid container justifyContent='space-between' sx={{ my: 2 }}>
         <Grid item xs='auto'>
-          <Typography variant='h5'>{(5000000).toLocaleString()}</Typography>
+          <Typography variant='h5'>{props.user.name}</Typography>
         </Grid>
 
         <Grid item xs='auto'>
