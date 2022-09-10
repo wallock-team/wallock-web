@@ -2,7 +2,7 @@ import { Button, Container, Grid, Typography } from '@mui/material'
 import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from 'next'
 import { VictoryAxis, VictoryBar, VictoryChart } from 'victory'
 import BotNav from '../components/bot-nav'
-import TopCategoriesSpent from '../components/top-categories-spent'
+import TopCategoriesSpent from '../components/category/top-categories-spent'
 import withAuthenticatedUser from '../lib/auth'
 
 export const getServerSideProps: GetServerSideProps = async (context) =>
