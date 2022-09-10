@@ -1,0 +1,71 @@
+const googleOidcInfomation = {
+  metadata: {
+    issuer: 'https://accounts.google.com',
+    authorization_endpoint: 'https://accounts.google.com/o/oauth2/v2/auth',
+    device_authorization_endpoint: 'https://oauth2.googleapis.com/device/code',
+    token_endpoint: 'https://oauth2.googleapis.com/token',
+    userinfo_endpoint: 'https://openidconnect.googleapis.com/v1/userinfo',
+    revocation_endpoint: 'https://oauth2.googleapis.com/revoke',
+    jwks_uri: 'https://www.googleapis.com/oauth2/v3/certs',
+    response_types_supported: [
+      'code',
+      'token',
+      'id_token',
+      'code token',
+      'code id_token',
+      'token id_token',
+      'code token id_token',
+      'none',
+    ],
+    subject_types_supported: ['public'],
+    id_token_signing_alg_values_supported: ['RS256'],
+    scopes_supported: ['openid', 'email', 'profile'],
+    token_endpoint_auth_methods_supported: [
+      'client_secret_post',
+      'client_secret_basic',
+    ],
+    claims_supported: [
+      'aud',
+      'email',
+      'email_verified',
+      'exp',
+      'family_name',
+      'given_name',
+      'iat',
+      'iss',
+      'locale',
+      'name',
+      'picture',
+      'sub',
+    ],
+    code_challenge_methods_supported: ['plain', 'S256'],
+    grant_types_supported: [
+      'authorization_code',
+      'refresh_token',
+      'urn:ietf:params:oauth:grant-type:device_code',
+      'urn:ietf:params:oauth:grant-type:jwt-bearer',
+    ],
+  },
+  jwks: {
+    keys: [
+      {
+        e: 'AQAB',
+        use: 'sig',
+        alg: 'RS256',
+        kty: 'RSA',
+        kid: '402f305b70581329ff289b5b3a67283806eca893',
+        n: 'jN4xvvGtTeXxq5DZxQxBdafPZAfXn6uowE1VsVXRaSo28GAizL0OdErMui028K3pLN1XkThebJruh7SSadG3H7WJfpxf4wyCgj1ofbRIhbjjKcPqO86Lo_Uekzsv5MeW4Q2ZOvZiJkLnp3zFnFKaeBV0P408k2HbGnHS6LEcDqDWA7G-TmE-TZIoB6HZ0Q7dN3oFYJ831NZj3IyNRC9lzNaG-S00AEvKNO-3J59qig09Z_M9yuHlU1WI-BNO8wyx-5kZFe_px6m7QQ95y9v9EZWeIKMCQkomkXYhLOa7GQT9ITh5uINeRqh4rIzY1z5uAHDkgIqHn1Ztpw1O47jOew',
+      },
+      {
+        kid: 'e847d9948e8545948fa8157b73e915c567302d4e',
+        alg: 'RS256',
+        n: '21mw5OBuQDYONRNRyek-5Mwe2anpgn-1Ny_RGKU9eNO6_wWg-emzTpwKt4c7dDXgfyJEJ63L0zD_CS-FSyzksHKoGGySsDVX-6nD6n36MGxVCz5Z60wgM5FaSKpf7G3iOJi0IiutLcoYv5jl72g6k6nqrRTe5BSm7JfNedjpRzOeBm3IPQChW9OSW_fufV8q7Ty09ZbS0fU6KRnsMyCi80EYYg0ondJDd56iVUKR4f_OivS-EAZSUzjcu4uWYDzc9lOw8sCbb9oJE4HWLE1bgbQ05jxIqzD-6oztB1Mi-0fT5A8BV26MXnSLVPiTCgbSmQSiTq-I__uqxAfsg2v6OQ',
+        e: 'AQAB',
+        kty: 'RSA',
+        use: 'sig',
+      },
+    ],
+  },
+}
+
+export default googleOidcInfomation
