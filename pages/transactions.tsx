@@ -5,11 +5,26 @@ import TransactionDate from '../components/transaction-date'
 import TransactionList from '../components/transaction-list'
 import WalletBalance from '../components/wallet-balance'
 
+const eventTimeLine = () => {
+  const currentDate: Date = new Date();
+  const timeLineValue: string[] = []
+
+  for (let i = 3; i != 0; i--) {
+    const passMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() - i, currentDate.getMonth())
+      .toLocaleDateString(undefined, { year: 'numeric', month: 'long' });
+    timeLineValue.push(passMonth);
+  }
+  timeLineValue.push(new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long' }));
+  timeLineValue.push(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, currentDate.getMonth())
+  .toLocaleDateString(undefined, { year: 'numeric', month: 'long' }));
+  return timeLineValue;
+};
+
 const Transactions: NextPage = () => (
   <>
     <AppBar position='sticky' sx={{ px: 2 }}>
       <WalletBalance balance={10_000_000} />
-      <TransactionDate></TransactionDate>
+      <TransactionDate timeLines={eventTimeLine()}></TransactionDate>
     </AppBar>
     <Container>
       <TransactionList
@@ -45,7 +60,7 @@ function getRandomTimestampInCurrentMonth() {
 
   return new Date(
     firstDateOfCurrentMonth.getTime() +
-      Math.random() *
-        (lastDateOfCurrentMonth.getTime() - firstDateOfCurrentMonth.getTime())
+    Math.random() *
+    (lastDateOfCurrentMonth.getTime() - firstDateOfCurrentMonth.getTime())
   )
 }
