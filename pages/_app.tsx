@@ -1,7 +1,6 @@
-import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 
-import { Container, CssBaseline } from '@mui/material'
+import { CssBaseline } from '@mui/material'
 
 import '@fontsource/roboto/300.css'
 import '@fontsource/roboto/400.css'
