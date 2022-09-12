@@ -33,7 +33,7 @@ const BotNav = () => (
         href='/transactions'
       />
       <BotNavItem label='Planning' icon={<Savings />} />
-      <BotNavItem label='Account' icon={<Person />} />
+      <BotNavItem label='Me' icon={<Person />} href='/me' />
     </BottomNavigation>
   </Paper>
 )
