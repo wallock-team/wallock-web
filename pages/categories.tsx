@@ -10,10 +10,29 @@ import {
   TextField,
   Toolbar,
 } from '@mui/material'
-import { NextPage } from 'next'
+import { NextPage, GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import BotNav from '../components/bot-nav'
+import withAuthenticatedUser from '../lib/auth'
+import axios from 'axios'
 
-const Categories: NextPage = () => (
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const res = await axios('http://localhost:3000/categories', {
+    headers: {
+      cookie: String(context.req.headers.cookie),
+    },
+  })
+
+  return {
+    props: {
+      categories: res.data,
+    },
+  }
+}
+
+const Categories: NextPage = (
+  props: InferGetServerSidePropsType<typeof getServerSideProps>
+) => (
   <>
     <AppBar position='sticky'>
       <Toolbar>
@@ -30,18 +49,19 @@ const Categories: NextPage = () => (
     </AppBar>
     <Container>
       <List>
-        {Array.from(Array(20).keys()).map((_, index) => (
-          <ListItem key={index}>
+        {props.categories.map((category) => (
+          <ListItem key={category.id}>
             <ListItemAvatar>
               <Avatar>
                 <ArrowBackIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText primary={'Category ' + index} />
+            <ListItemText primary={category.name} />
           </ListItem>
         ))}
       </List>
     </Container>
+    <BotNav />
   </>
 )
 
