@@ -1,7 +1,7 @@
 import { Container, Typography, Stack, Button } from '@mui/material'
 import { NextPage, GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import withAuthenticatedUser from '../lib/auth'
-import BotNav from './../components/bot-nav'
+import BotNav from '../components/bot-nav'
 import Link from 'next/link'
 import CategoryIcon from '@mui/icons-material/Category'
 
