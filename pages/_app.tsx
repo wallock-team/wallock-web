@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { Container, CssBaseline } from '@mui/material'
+import { CssBaseline } from '@mui/material'
 
 import '@fontsource/roboto/300.css'
 import '@fontsource/roboto/400.css'
