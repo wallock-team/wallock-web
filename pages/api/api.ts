@@ -1,4 +1,5 @@
 import axios from '../../lib/auth/config-axios';
+import { transactionsApi } from './transactions-api';
 
 export default class Api {
     public static async fromServer(context: any) {
