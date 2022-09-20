@@ -24,11 +24,13 @@ const withAuthPage = <
     if (amILoggedInResponse.status === 200) {
       return getServerSideProps
         ? {
-            ...getServerSideProps(context),
+            ...(await getServerSideProps(context)),
+            
+            
           }
         : {
             props: {
-              user: amILoggedInResponse.data.data,
+              user: amILoggedInResponse.data,
             },
           }
     } else {
