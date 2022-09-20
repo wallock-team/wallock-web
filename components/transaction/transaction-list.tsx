@@ -32,7 +32,7 @@ const TransactionList = (props: Props) => {
         <ListItem
           key={t.id}
           secondaryAction={
-            <Typography variant='body1'>{t.amount.toLocaleString()}</Typography>
+            <Typography variant='body1'>{t.amount}</Typography>
           }
           onClick={() => handleOnClick(t.id)}
         >

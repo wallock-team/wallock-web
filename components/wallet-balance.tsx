@@ -1,4 +1,4 @@
-import { Typography, Button, Grid, Select, InputLabel, MenuItem, FormControl } from '@mui/material'
+import { Typography, Button, Grid } from '@mui/material'
 import { Wallet, Menu, ArrowDropDown, Search, Today, Visibility } from '@mui/icons-material';
 type Props = {
   balance: number
@@ -14,7 +14,7 @@ const WalletBalance = (props: Props) => (
           <Typography variant='body2'>Total Balance</Typography>
           <ArrowDropDown></ArrowDropDown>
         </Grid>
-        <Typography variant='h6'>{props.balance.toLocaleString()}</Typography>
+        <Typography variant='h6'>{props.balance}</Typography>
       </Grid>
     </Grid>
     <Grid container alignContent={'center'} item xs='auto'>
