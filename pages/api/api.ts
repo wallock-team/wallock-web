@@ -1,5 +1,6 @@
 import axios from '../../lib/auth/config-axios';
-import { transactionsApi } from './transactions-api';
+import CategoriesApi from './categories-api';
+import TransactionsApi from './transactions-api';
 
 export default class Api {
     public static async fromServer(context: any) {
@@ -16,7 +17,8 @@ export default class Api {
         if (context) {
             instance.defaults.headers.get.Cookie = String(context.req.headers.cookie)
         }
-        this.transactions = transactionsApi(instance)
+        this.transactions = new TransactionsApi(instance)
+        this.categories = new CategoriesApi(instance)
     }
 
     public readonly transactions: any
