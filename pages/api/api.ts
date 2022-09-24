@@ -11,10 +11,7 @@ export default class Api {
     }
 
     public constructor(private readonly context?: any) {
-        let defaultsOption = ({
-            withCredentials: true,
-        })
-        let instance = axios.create(defaultsOption)
+        let instance = axios.create()
 
         if (context) {
             instance.defaults.headers.get.Cookie = String(context.req.headers.cookie)
