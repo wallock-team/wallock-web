@@ -7,7 +7,7 @@ export default class Api {
         return new Api(context)
     }
 
-    public static async fromWeb() {
+    public static fromWeb() {
         return new Api()
     }
 
