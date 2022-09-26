@@ -13,7 +13,8 @@ export const getServerSideProps: GetServerSideProps = withAuthPage(async (contex
   let response = await apiServer.transactions.getById(id)
   return {
     props: {
-     transaction: response.data
+     transaction: response.data,
+     id: id
     }
   }
 })
