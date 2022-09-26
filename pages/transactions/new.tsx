@@ -5,14 +5,14 @@ import { useState } from "react"
 import { useNavigate } from 'react-router-dom';
 import { useRouter } from "next/router"
 import TransactionForm from "../../components/transaction/transactionForm"
-import api from '../api/api'
+import Api from '../api/api'
 
 const NewTransaction: NextPage = () => {
-  
-  const [transaction, setTransaction] = useState(api.fromClient.transaction().initialTransition())
+  let api = Api.fromWeb()
+  const [transaction, setTransaction] = useState(api.transactions.initialTransition())
   const router = useRouter()
   const handleAddTransaction = async () => {
-    await api.fromClient.transaction().add({...transaction, amount: parseInt(transaction.amount)})
+    await api.transactions.add({...transaction, amount: parseInt(transaction.amount)})
     router.push('/transactions')
   }
   console.log(transaction);

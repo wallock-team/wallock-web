@@ -1,11 +1,13 @@
-export const transactionsApi = (configedAxios) => ({
-    configedAxios,
+import { Axios } from 'axios';
+export default class TransactionsApi {
+  public constructor(private readonly configuredAxios: Axios) {}
+
     async getCurrentMonth() {
-        return await this.configedAxios.get('/transactions/current')
-    },
+        return await this.configuredAxios.get('/transactions/current-month')
+    }
     async getById(id: any) {
-        return await this.configedAxios.get(`/transactions/${id}`)
-    },
+        return await this.configuredAxios.get(`/transactions/${id}`)
+    }
     initialTransition () {
         return { 
             amount: 0,
@@ -13,14 +15,15 @@ export const transactionsApi = (configedAxios) => ({
             note: '',
             cateId: 1,
         }
-    },
-    async add (transaction: any) {
-        return this.configedAxios.post(`/transactions`, transaction);
-    },
-    async update(transaction: any) {
-        return await this.configedAxios.patch(`/transactions`, transaction);
-    },
-    async remove(id: number) {
-        return await this.configedAxios.delete(`/transactions/${id}`);
     }
-})
+    async add (transaction: any) {
+        console.log('Transaction added' + JSON.stringify(transaction))
+        return await this.configuredAxios.post('/transactions', transaction);
+    }
+    async update(transaction: any) {
+        return await this.configuredAxios.patch(`/transactions`, transaction);
+    }
+    async remove(id: number) {
+        return await this.configuredAxios.delete(`/transactions/${id}`);
+    }
+}
