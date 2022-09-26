@@ -1,4 +1,4 @@
-import axios from '../../lib/auth/config-axios';
+import axios from 'axios';
 import CategoriesApi from './categories-api';
 import TransactionsApi from './transactions-api';
 
@@ -12,13 +12,16 @@ export default class Api {
     }
 
     public constructor(private readonly context?: any) {
-        let instance = axios.create()
+        const configuredAxios = axios.create({
+            baseURL: 'http://localhost:3000',
+            withCredentials: true
+        });
 
-        if (context) {
-            instance.defaults.headers.get.Cookie = String(context.req.headers.cookie)
+        if (this.context) {
+            configuredAxios.defaults.headers.get.Cookie = String(context.req.headers.cookie)
         }
-        this.transactions = new TransactionsApi(instance)
-        this.categories = new CategoriesApi(instance)
+        this.transactions = new TransactionsApi(configuredAxios)
+        this.categories = new CategoriesApi(configuredAxios)
     }
 
     public readonly transactions: any
