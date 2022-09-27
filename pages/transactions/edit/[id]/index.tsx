@@ -3,7 +3,7 @@ import { AppBar, Button, Grid, Typography } from "@mui/material"
 import { GetServerSideProps, NextPage } from "next"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
-import TransactionForm from "../../../../components/transaction/transactionForm"
+import TransactionForm from "../../../../components/transaction/new-transaction-form"
 import Api from "../../../../lib/api/api"
 import withAuthPage from "../../../../lib/auth/withAuthPage"
 
