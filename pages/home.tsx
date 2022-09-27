@@ -3,16 +3,9 @@ import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from 'next'
 import { VictoryAxis, VictoryBar, VictoryChart } from 'victory'
 import BotNav from '../components/bot-nav'
 import TopCategoriesSpent from '../components/category/top-categories-spent'
-import withAuthenticatedUser from '../lib/auth'
+import withAuthPage from '../lib/auth/withAuthPage'
 
-export const getServerSideProps: GetServerSideProps = async (context) =>
-  await withAuthenticatedUser(context, async (context, user) => {
-    return {
-      props: {
-        user,
-      },
-    }
-  })
+export const getServerSideProps: GetServerSideProps = withAuthPage()
 
 const Home: NextPage = (
   props: InferGetServerSidePropsType<typeof getServerSideProps>
