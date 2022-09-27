@@ -3,7 +3,7 @@ import { GetServerSideProps, NextPage } from 'next'
 import TransactionList from '../../components/transaction/transaction-list'
 import WalletBalance from '../../components/wallet-balance'
 import withAuthPage from '../../lib/auth/withAuthPage'
-import Api from '../api/api'
+import Api from '../../lib/api/api'
 
 export const getServerSideProps: GetServerSideProps = withAuthPage(
   async (context) => {

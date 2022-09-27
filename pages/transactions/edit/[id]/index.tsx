@@ -4,7 +4,7 @@ import { GetServerSideProps, NextPage } from "next"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import TransactionForm from "../../../../components/transaction/transactionForm"
-import Api from "../../../api/api"
+import Api from "../../../../lib/api/api"
 import withAuthPage from "../../../../lib/auth/withAuthPage"
 
 export const getServerSideProps: GetServerSideProps = withAuthPage(async (context) => {
