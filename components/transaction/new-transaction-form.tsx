@@ -4,9 +4,11 @@
 import { NextComponentType } from 'next'
 import {
   Box,
+  Components,
   Grid,
   MenuItem,
   Select,
+  Stack,
   TextField,
   Typography,
 } from '@mui/material'
@@ -17,8 +19,9 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
 import { Container } from '@mui/system'
 import { useEffect, useState } from 'react'
 import { MobileDatePicker } from '@mui/x-date-pickers'
+import { Component, Element } from 'react'
 
-const TransactionForm: NextComponentType = (props) => {
+const NewTransactionForm: NextComponentType = (props) => {
   const { transaction, setTransaction } = props
   const handleDateChange = (newValue: any) => {
     setTransaction((prev) => ({ ...prev, date: newValue }))
@@ -38,11 +41,11 @@ const TransactionForm: NextComponentType = (props) => {
   console.log(transaction)
 
   return transaction ? (
-    <Container sx={{ justifyContent: 'center' }}>
-      <Grid container sx={{ width: '70%' }}>
-        <Grid item xs={12}>
-          <Box>
-            <PaidIcon />
+    <Container>
+      <Stack spacing={1}>
+        <Field
+          icon={<PaidIcon />}
+          field={
             <TextField
               name='amount'
               onChange={(e) => handleOnChange(e)}
@@ -51,11 +54,11 @@ const TransactionForm: NextComponentType = (props) => {
               fullWidth
               value={transaction.amount}
             />
-          </Box>
-        </Grid>
-        <Grid item xs={12}>
-          <Box>
-            <CategoryIcon />
+          }
+        />
+        <Field
+          icon={<CategoryIcon />}
+          field={
             <Select
               value={transaction.categories ? transaction.categories.id : 1}
               name='cateId'
@@ -66,7 +69,39 @@ const TransactionForm: NextComponentType = (props) => {
               <MenuItem value={2}>Two</MenuItem>
               <MenuItem value={3}>Three</MenuItem>
             </Select>
-          </Box>
+          }
+        />
+      </Stack>
+      <Grid container spacing={2}>
+        <Grid item xs='auto'>
+          <PaidIcon />
+        </Grid>
+        <Grid item xs>
+          <TextField
+            name='amount'
+            onChange={(e) => handleOnChange(e)}
+            type='number'
+            variant='outlined'
+            fullWidth
+            value={transaction.amount}
+          />
+        </Grid>
+      </Grid>
+      <Grid container spacing={2}>
+        <Grid item xs='auto'>
+          <CategoryIcon />
+        </Grid>
+        <Grid item xs>
+          <Select
+            value={transaction.categories ? transaction.categories.id : 1}
+            name='cateId'
+            onChange={(e) => handleOnChange(e)}
+            fullWidth
+          >
+            <MenuItem value={1}>One</MenuItem>
+            <MenuItem value={2}>Two</MenuItem>
+            <MenuItem value={3}>Three</MenuItem>
+          </Select>
         </Grid>
         <Grid item xs={12}>
           <Box>
@@ -96,4 +131,22 @@ const TransactionForm: NextComponentType = (props) => {
   )
 }
 
-export default TransactionForm
+type FieldProps = {
+  icon: Element
+  field: Element
+}
+
+const Field = (props: FieldProps) => {
+  return (
+    <Grid container spacing={1}>
+      <Grid item xs='auto'>
+        {props.icon}
+      </Grid>
+      <Grid item xs>
+        {props.field}
+      </Grid>
+    </Grid>
+  )
+}
+
+export default NewTransactionForm

@@ -3,7 +3,7 @@ import { AppBar, Button, Typography, Toolbar, IconButton } from '@mui/material'
 import { NextPage } from 'next'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import TransactionForm from '../../components/transaction/new-transaction-form'
+import NewTransactionForm from '../../components/transaction/new-transaction-form'
 import Api from '../../lib/api/api'
 
 const NewTransaction: NextPage = () => {
@@ -33,7 +33,7 @@ const NewTransaction: NextPage = () => {
           </Button>
         </Toolbar>
       </AppBar>
-      <TransactionForm
+      <NewTransactionForm
         transaction={transaction}
         setTransaction={setTransaction}
       />
