@@ -12,10 +12,10 @@ export default class CategoriesApi {
   }
 
   public async delete(id: number) {
-    return await this.axios.delete(`/categories/${id}`);
+    return await this.axios.delete(`/categories/${id}`)
   }
 
   public async getById(id: number) {
-    return await this.axios.get(`/categories/${id}`);
+    return await this.axios.get(`/categories/${id}`)
   }
 }
