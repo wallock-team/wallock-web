@@ -4,7 +4,7 @@ import { Close } from '@mui/icons-material';
 import Link from 'next/link';
 import TransactionDetail from '../../components/transaction/transaction-detail';
 import withAuthPage from '../../lib/auth/withAuthPage';
-import Api from '../api/api';
+import Api from '../../lib/api/api';
 
 export const getServerSideProps: GetServerSideProps = withAuthPage(async (context) => {
   let apiServer = await Api.fromServer(context)
