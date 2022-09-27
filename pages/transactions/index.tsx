@@ -5,24 +5,24 @@ import WalletBalance from '../../components/wallet-balance'
 import withAuthPage from '../../lib/auth/withAuthPage'
 import Api from '../api/api'
 
-export const getServerSideProps: GetServerSideProps = withAuthPage(async (context) => {
-  let apiServer = await Api.fromServer(context)
-  let response = await apiServer.transactions.getCurrentMonth()
-  return {
-    props: {
-      transactions: response.data
-    },
+export const getServerSideProps: GetServerSideProps = withAuthPage(
+  async (context) => {
+    let apiServer = await Api.fromServer(context)
+    let response = await apiServer.transactions.getCurrentMonth()
+    return {
+      props: {
+        transactions: response.data,
+      },
+    }
   }
-})
-
+)
 
 const Transactions: NextPage = (props: any) => {
-
   return (
     <div>
       <AppBar position='sticky' sx={{ px: 2 }}>
         <WalletBalance balance={10000000} />
-        <Tabs variant='scrollable' >
+        <Tabs variant='scrollable'>
           <Tab label='08.01 - 08.07' />
           <Tab label='08.08 - 08.14' />
           <Tab label='Last week' />
@@ -31,11 +31,10 @@ const Transactions: NextPage = (props: any) => {
         </Tabs>
       </AppBar>
       <Container>
-        <TransactionList
-          transactions={props.transactions}
-        />
+        <TransactionList transactions={props.transactions} />
       </Container>
-    </div>)
+    </div>
+  )
 }
 
 export default Transactions
@@ -55,7 +54,7 @@ function getRandomTimestampInCurrentMonth() {
 
   return new Date(
     firstDateOfCurrentMonth.getTime() +
-    Math.random() *
-    (lastDateOfCurrentMonth.getTime() - firstDateOfCurrentMonth.getTime())
+      Math.random() *
+        (lastDateOfCurrentMonth.getTime() - firstDateOfCurrentMonth.getTime())
   )
 }
