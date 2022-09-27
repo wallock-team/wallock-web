@@ -1,8 +1,7 @@
 import { Close } from '@mui/icons-material'
-import { AppBar, Button, Grid, Typography } from '@mui/material'
+import { AppBar, Button, Typography, Toolbar, IconButton } from '@mui/material'
 import { NextPage } from 'next'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useRouter } from 'next/router'
 import TransactionForm from '../../components/transaction/transactionForm'
 import Api from '../../lib/api/api'
@@ -24,28 +23,15 @@ const NewTransaction: NextPage = () => {
   return (
     <>
       <AppBar position='sticky' sx={{ px: 2 }}>
-        <Grid container justifyContent='space-between' sx={{ my: 2 }}>
-          <Grid container alignContent={'center'} item xs='auto'>
-            <Close sx={{ fontSize: 35, margin: 'auto' }}></Close>
-            <Typography sx={{ fontSize: 20, margin: 'auto' }}>
-              Transaction
-            </Typography>
-          </Grid>
-          <Grid>
-            <Button sx={{ marginLeft: '10px' }} color='success'>
-              {' '}
-              Edit{' '}
-            </Button>
-            <Button
-              onClick={() => handleAddTransaction()}
-              sx={{ marginLeft: '10px' }}
-              color='error'
-            >
-              {' '}
-              Add{' '}
-            </Button>
-          </Grid>
-        </Grid>
+        <Toolbar>
+          <IconButton>
+            <Close />
+          </IconButton>
+          <Typography sx={{ flexGrow: 1 }}>Add transaction</Typography>
+          <Button variant='contained' onClick={() => handleAddTransaction()}>
+            Save
+          </Button>
+        </Toolbar>
       </AppBar>
       <TransactionForm
         transaction={transaction}
