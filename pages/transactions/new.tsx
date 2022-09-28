@@ -5,6 +5,9 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import NewTransactionForm from '../../components/transaction/new-transaction-form'
 import Api from '../../lib/api/api'
+import withAuthPage from '../../lib/auth/withAuthPage'
+
+export const getServerSideProps = withAuthPage()
 
 const NewTransaction: NextPage = () => {
   const router = useRouter()
