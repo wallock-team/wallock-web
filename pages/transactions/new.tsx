@@ -7,11 +7,11 @@ import NewTransactionForm from '../../components/transaction/new-transaction-for
 import Api from '../../lib/api/api'
 
 const NewTransaction: NextPage = () => {
+  const router = useRouter()
   let api = Api.fromWeb()
   const [transaction, setTransaction] = useState(
     api.transactions.initialTransition()
   )
-  const router = useRouter()
   const handleAddTransaction = async () => {
     await api.transactions.add({
       ...transaction,
@@ -24,7 +24,7 @@ const NewTransaction: NextPage = () => {
     <>
       <AppBar position='sticky' sx={{ px: 2 }}>
         <Toolbar>
-          <IconButton>
+          <IconButton onClick={() => router.back()}>
             <Close />
           </IconButton>
           <Typography sx={{ flexGrow: 1 }}>Add transaction</Typography>
