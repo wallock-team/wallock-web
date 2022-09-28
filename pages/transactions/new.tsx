@@ -33,10 +33,7 @@ const NewTransaction: NextPage = () => {
           </Button>
         </Toolbar>
       </AppBar>
-      <NewTransactionForm
-        transaction={transaction}
-        setTransaction={setTransaction}
-      />
+      <NewTransactionForm />
     </>
   )
 }
