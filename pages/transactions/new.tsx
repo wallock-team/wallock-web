@@ -27,7 +27,7 @@ const NewTransaction: NextPage = () => {
     <>
       <AppBar position='sticky' sx={{ px: 2 }}>
         <Toolbar>
-          <IconButton onClick={() => router.back()}>
+          <IconButton onClick={() => router.push('/home')}>
             <Close />
           </IconButton>
           <Typography sx={{ flexGrow: 1 }}>Add transaction</Typography>
