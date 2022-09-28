@@ -1,4 +1,5 @@
 import { Axios } from 'axios'
+import { Category } from './types'
 
 export default class CategoriesApi {
   public constructor(private readonly axios: Axios) {}
@@ -13,6 +14,10 @@ export default class CategoriesApi {
 
   public async delete(id: number) {
     return await this.axios.delete(`/categories/${id}`)
+  }
+
+  public async getAll() {
+    return (await this.axios.get<Category[]>('/categories')).data
   }
 
   public async getById(id: number) {
