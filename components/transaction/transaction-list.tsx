@@ -9,12 +9,11 @@ import {
 import { Work } from '@mui/icons-material'
 import { useRouter } from 'next/router'
 
-
 type Transaction = {
   id: number
   amount: number
   categories: {
-    name: string,
+    name: string
     isExpense: boolean
   }
   timestamp: Date
@@ -31,9 +30,7 @@ const TransactionList = (props: Props) => {
       {props.transactions.map((t) => (
         <ListItem
           key={t.id}
-          secondaryAction={
-            <Typography variant='body1'>{t.amount}</Typography>
-          }
+          secondaryAction={<Typography variant='body1'>{t.amount}</Typography>}
           onClick={() => handleOnClick(t.id)}
         >
           <ListItemAvatar>
@@ -41,7 +38,7 @@ const TransactionList = (props: Props) => {
               <Work />
             </Avatar>
           </ListItemAvatar>
-          <ListItemText primary={t.categories.name} secondary={t.note} />
+          <ListItemText primary={t.category.name} secondary={t.note} />
         </ListItem>
       ))}
     </List>
@@ -49,4 +46,3 @@ const TransactionList = (props: Props) => {
 }
 
 export default TransactionList
-
