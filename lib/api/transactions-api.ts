@@ -7,7 +7,7 @@ export default class TransactionsApi {
     return await this.configuredAxios.get('/transactions/current-month')
   }
   async getById(id: any) {
-    return await this.configuredAxios.get(`/transactions/${id}`)
+    return (await this.configuredAxios.get(`/transactions/${id}`)).data
   }
   initialTransition() {
     return {
