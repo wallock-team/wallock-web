@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { InferGetServerSidePropsType, NextPage } from 'next'
 import { useRouter } from 'next/router'
 
@@ -41,6 +42,7 @@ export const getServerSideProps = withAuthPage<Props>(async (context: any) => {
 })
 
 const NewTransaction: NextPage<Props> = (props) => {
+  const [isCreating, setCreating] = useState<boolean>(false)
   const router = useRouter()
   const api = Api.fromWeb()
 
@@ -49,8 +51,11 @@ const NewTransaction: NextPage<Props> = (props) => {
     validationSchema: Yup.object({
       amount: Yup.number().min(0, 'Must be positive').required('Required'),
     }),
-    onSubmit: (values) => {
-      console.log(JSON.stringify(values))
+    onSubmit: async (values) => {
+      setCreating(true)
+      await api.transactions.add(values)
+      setCreating(false)
+      router.push('/transactions')
     },
   })
 
@@ -63,6 +68,7 @@ const NewTransaction: NextPage<Props> = (props) => {
           </IconButton>
           <Typography sx={{ flexGrow: 1 }}>Add transaction</Typography>
           <Button
+            disabled={isCreating}
             variant='contained'
             onClick={() => {
               formik.handleSubmit()
