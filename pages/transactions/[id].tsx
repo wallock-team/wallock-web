@@ -44,7 +44,11 @@ const TransactionDetail: NextPage = (props) => {
           </IconButton>
           <Typography sx={{ flexGrow: 1 }}>Transaction detail</Typography>
           <IconButton>
-            <EditIcon />
+            <EditIcon
+              onClick={() => {
+                router.push(`/transactions/${props.transaction.id}/edit`)
+              }}
+            />
           </IconButton>
         </Toolbar>
       </AppBar>

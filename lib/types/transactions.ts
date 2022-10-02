@@ -9,6 +9,10 @@ export type CreateTransactionDto = {
   date?: Date
 }
 
+export type UpdateTransactionDto = Partial<CreateTransactionDto> & {
+  id: number
+}
+
 export type Transaction = BaseEntity & {
   amount: number
   note?: string
