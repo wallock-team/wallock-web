@@ -2,10 +2,16 @@ import {
   AppBar,
   Container,
   Typography,
-  Button,
   Toolbar,
   IconButton,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
 } from '@mui/material'
+import PaidIcon from '@mui/icons-material/Paid'
+import CategoryIcon from '@mui/icons-material/Category'
+import NotesIcon from '@mui/icons-material/Notes'
 import { GetServerSideProps, NextPage } from 'next'
 import { Close } from '@mui/icons-material'
 import withAuthPage from 'lib/auth/withAuthPage'
@@ -42,7 +48,28 @@ const TransactionDetail: NextPage = (props) => {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Container></Container>
+      <Container maxWidth='md'>
+        <List>
+          <ListItem>
+            <ListItemAvatar>
+              <PaidIcon />
+            </ListItemAvatar>
+            <ListItemText primary={props.transaction.amount} />
+          </ListItem>
+          <ListItem>
+            <ListItemAvatar>
+              <CategoryIcon />
+            </ListItemAvatar>
+            <ListItemText primary={props.transaction.category.name} />
+          </ListItem>
+          <ListItem>
+            <ListItemAvatar>
+              <NotesIcon />
+            </ListItemAvatar>
+            <ListItemText primary={props.transaction.category.note} />
+          </ListItem>
+        </List>
+      </Container>
     </>
   )
 }
