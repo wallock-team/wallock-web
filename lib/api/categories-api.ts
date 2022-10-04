@@ -22,7 +22,9 @@ export default class CategoriesApi {
   }
 
   public async getAll() {
-    return (await this.axios.get<Category[]>('/categories')).data
+    const categories = (await this.axios.get<Category[]>('/categories')).data
+    console.log(categories)
+    return categories
   }
 
   public async getById(id: number) {
