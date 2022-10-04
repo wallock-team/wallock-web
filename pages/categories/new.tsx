@@ -5,15 +5,18 @@ import {
   FormControl,
   FormControlLabel,
   FormLabel,
-  Grid,
   IconButton,
+  InputAdornment,
   Radio,
   RadioGroup,
+  Stack,
   TextField,
   Toolbar,
   Typography,
 } from '@mui/material'
 import ClearIcon from '@mui/icons-material/Clear'
+import CategoryIcon from '@mui/icons-material/Category'
+import TopicIcon from '@mui/icons-material/Topic'
 
 const NewCategory = () => (
   <>
@@ -23,7 +26,7 @@ const NewCategory = () => (
           <ClearIcon />
         </IconButton>
         <Typography variant='h6' sx={{ flexGrow: 1 }}>
-          Create new category
+          New category
         </Typography>
         <Button variant='contained' sx={{ ml: 1 }}>
           Save
@@ -31,23 +34,48 @@ const NewCategory = () => (
       </Toolbar>
     </AppBar>
     <Container sx={{ mt: 2 }}>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <TextField label='Category name' fullWidth />
-        </Grid>
-        <Grid item xs={12}>
-          <FormControl fullWidth>
-            <FormLabel>Type</FormLabel>
-            <RadioGroup row>
-              <FormControlLabel label='Income' control={<Radio />} />
-              <FormControlLabel label='Expense' control={<Radio />} />
-            </RadioGroup>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12}>
-          <TextField label='Group' fullWidth />
-        </Grid>
-      </Grid>
+      <Stack spacing={2}>
+        <TextField
+          name='name'
+          fullWidth
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position='start'>
+                <CategoryIcon />
+              </InputAdornment>
+            ),
+          }}
+        />
+        <FormControl>
+          <RadioGroup
+            row
+            aria-labelledby='demo-row-radio-buttons-group-label'
+            name='row-radio-buttons-group'
+          >
+            <FormControlLabel
+              value='income'
+              control={<Radio />}
+              label='Income'
+            />
+            <FormControlLabel
+              value='expense'
+              control={<Radio />}
+              label='Expense'
+            />
+          </RadioGroup>
+        </FormControl>
+        <TextField
+          name='group'
+          fullWidth
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position='start'>
+                <TopicIcon />
+              </InputAdornment>
+            ),
+          }}
+        />
+      </Stack>
     </Container>
   </>
 )
