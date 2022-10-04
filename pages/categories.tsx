@@ -12,22 +12,19 @@ import {
 } from '@mui/material'
 import { NextPage, GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
-import BotNav from '../components/bot-nav'
-import withAuthenticatedUser from '../lib/auth'
-import axios from 'axios'
-import withAuthPage from '../lib/auth/withAuthPage'
+import BotNav from 'components/bot-nav'
+import withAuthPage from 'lib/auth/withAuthPage'
+import Api from 'lib/api/api'
 
 export const getServerSideProps: GetServerSideProps = withAuthPage(
   async (context) => {
-    const res = await axios('http://localhost:3000/categories', {
-      headers: {
-        cookie: String(context.req.headers.cookie),
-      },
-    })
+    const api = await Api.fromServer(context)
+
+    const categories = await api.categories.getAll()
 
     return {
       props: {
-        categories: res.data,
+        categories,
       },
     }
   }
