@@ -1,10 +1,14 @@
-import { AppBar, Container, Tab, Tabs } from '@mui/material'
+import { AppBar, Button, Container, Grid, Tab, Tabs, Toolbar } from '@mui/material'
 import { GetServerSideProps, NextPage } from 'next'
+import Link from 'next/link';
 
 import TransactionList from 'components/transaction/transaction-list'
 import WalletBalance from 'components/wallet-balance'
+import BotNav from 'components/bot-nav'
 import withAuthPage from 'lib/auth/withAuthPage'
 import Api from 'lib/api/api'
+import { useAppContext } from '../context';
+
 
 export const getServerSideProps: GetServerSideProps = withAuthPage(
   async (context) => {
@@ -19,10 +23,14 @@ export const getServerSideProps: GetServerSideProps = withAuthPage(
 )
 
 const Transactions: NextPage = (props: any) => {
+  const appContext = useAppContext()
+  const {user} = appContext
   return (
     <div>
       <AppBar position='sticky' sx={{ px: 2 }}>
-        <WalletBalance balance={10000000} />
+        <Toolbar>
+          <WalletBalance balance={user.balance} />
+        </Toolbar>
         <Tabs variant='scrollable'>
           <Tab label='08.01 - 08.07' />
           <Tab label='08.08 - 08.14' />
@@ -34,6 +42,8 @@ const Transactions: NextPage = (props: any) => {
       <Container>
         <TransactionList transactions={props.transactions} />
       </Container>
+      <BotNav />
+
     </div>
   )
 }
@@ -55,7 +65,7 @@ function getRandomTimestampInCurrentMonth() {
 
   return new Date(
     firstDateOfCurrentMonth.getTime() +
-      Math.random() *
-        (lastDateOfCurrentMonth.getTime() - firstDateOfCurrentMonth.getTime())
+    Math.random() *
+    (lastDateOfCurrentMonth.getTime() - firstDateOfCurrentMonth.getTime())
   )
 }
