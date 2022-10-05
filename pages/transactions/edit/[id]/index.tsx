@@ -6,7 +6,6 @@ import { useRouter } from 'next/router'
 import NewTransactionForm from '../../../../components/transaction/new-transaction-form'
 import Api from '../../../../lib/api/api'
 import withAuthPage from '../../../../lib/auth/withAuthPage'
-import { useAppContext } from '../../../context'
 
 export const getServerSideProps: GetServerSideProps = withAuthPage(
   async (context) => {
@@ -26,11 +25,9 @@ export const getServerSideProps: GetServerSideProps = withAuthPage(
 const edit: NextPage = (props) => {
   let api = Api.fromWeb()
   let router = useRouter()
-  let {refreshUser} = useAppContext()
   let [transaction, setTransaction] = useState(props.transaction)
   const handleEdit = async () => {
     await api.transactions.update(transaction)
-    await refreshUser()
     router.push('/transactions')
   }
 
