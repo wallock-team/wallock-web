@@ -15,8 +15,13 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import BotNav from 'components/bot-nav'
 import withAuthPage from 'lib/auth/withAuthPage'
 import Api from 'lib/api/api'
+import { Category } from 'lib/types/categories'
 
-export const getServerSideProps: GetServerSideProps = withAuthPage(
+type PageProps = {
+  categories: Category[]
+}
+
+export const getServerSideProps: GetServerSideProps = withAuthPage<PageProps>(
   async (context) => {
     const api = await Api.fromServer(context)
 
@@ -30,9 +35,7 @@ export const getServerSideProps: GetServerSideProps = withAuthPage(
   }
 )
 
-const Categories: NextPage = (
-  props: InferGetServerSidePropsType<typeof getServerSideProps>
-) => (
+const Categories: NextPage<PageProps> = (props) => (
   <>
     <AppBar position='sticky'>
       <Toolbar>
