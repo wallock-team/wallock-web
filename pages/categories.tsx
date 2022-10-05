@@ -47,7 +47,7 @@ const Categories: NextPage = (
         />
       </Toolbar>
     </AppBar>
-    <Container>
+    <Container sx={{ mb: 8 }}>
       <List>
         {props.categories.map((category) => (
           <ListItem key={category.id}>
