@@ -7,6 +7,7 @@ import WalletBalance from 'components/wallet-balance'
 import BotNav from 'components/bot-nav'
 import withAuthPage from 'lib/auth/withAuthPage'
 import Api from 'lib/api/api'
+import { useAppContext } from '../context';
 
 
 export const getServerSideProps: GetServerSideProps = withAuthPage(
@@ -22,11 +23,13 @@ export const getServerSideProps: GetServerSideProps = withAuthPage(
 )
 
 const Transactions: NextPage = (props: any) => {
+  const appContext = useAppContext()
+  const {user} = appContext
   return (
     <div>
       <AppBar position='sticky' sx={{ px: 2 }}>
         <Toolbar>
-          <WalletBalance balance={10000000} />
+          <WalletBalance balance={user.balance} />
         </Toolbar>
         <Tabs variant='scrollable'>
           <Tab label='08.01 - 08.07' />
