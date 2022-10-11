@@ -4,17 +4,20 @@ import { VictoryAxis, VictoryBar, VictoryChart } from 'victory'
 import BotNav from '../components/bot-nav'
 import TopCategoriesSpent from '../components/category/top-categories-spent'
 import withAuthPage from '../lib/auth/withAuthPage'
+import { useAppContext } from './context'
 
 export const getServerSideProps: GetServerSideProps = withAuthPage()
 
 const Home: NextPage = (
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) => {
-  return (
+  const appContext = useAppContext()
+  const {user} = appContext
+  return user ? (
     <Container>
       <Grid container justifyContent='space-between' sx={{ my: 2 }}>
         <Grid item xs='auto'>
-          <Typography variant='h5'>{props.user.name}</Typography>
+          <Typography variant='h5'>{user.name}</Typography>
         </Grid>
 
         <Grid item xs='auto'>
@@ -46,7 +49,7 @@ const Home: NextPage = (
 
       <BotNav />
     </Container>
-  )
+  ) : <></>
 }
 
 export default Home
