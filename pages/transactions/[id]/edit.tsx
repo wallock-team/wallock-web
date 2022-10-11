@@ -74,6 +74,12 @@ const UpdateTransaction: NextPage<Props> = (props) => {
     },
   })
 
+  const handleRemove = async (id) => {
+    await api.transactions.remove(id)
+    await refreshUser()
+    router.push('/transactions')
+  }
+
   return (
     <>
       <AppBar position='sticky' sx={{ px: 2 }}>
@@ -82,6 +88,15 @@ const UpdateTransaction: NextPage<Props> = (props) => {
             <Close />
           </IconButton>
           <Typography sx={{ flexGrow: 1 }}>Edit transaction</Typography>
+          <Button
+            disabled={isCreating}
+            variant='contained'
+            onClick={() => {
+              handleRemove(props.transactionToBeEdited.category.id)
+            }}
+          >
+            Delete
+          </Button>
           <Button
             disabled={isCreating}
             variant='contained'
