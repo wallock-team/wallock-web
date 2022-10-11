@@ -17,7 +17,7 @@ export const getServerSideProps: GetServerSideProps = withAuthPage(
     return {
       props: {
         transactions: response.data,
-      },
+      }
     }
   }
 )
@@ -25,7 +25,7 @@ export const getServerSideProps: GetServerSideProps = withAuthPage(
 const Transactions: NextPage = (props: any) => {
   const appContext = useAppContext()
   const {user} = appContext
-  return (
+  return user ? (
     <div>
       <AppBar position='sticky' sx={{ px: 2 }}>
         <Toolbar>
@@ -44,8 +44,8 @@ const Transactions: NextPage = (props: any) => {
       </Container>
       <BotNav />
 
-    </div>
-  )
+    </div> 
+  ): <></>
 }
 
 export default Transactions
