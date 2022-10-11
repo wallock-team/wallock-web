@@ -6,7 +6,6 @@ import {
   Savings,
   Person,
 } from '@mui/icons-material'
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Link from 'next/link'
 import { ReactNode } from 'react'
 
@@ -32,11 +31,6 @@ const BotNav = () => (
         label='Transactions'
         icon={<AccountBalanceWallet />}
         href='/transactions'
-      />
-      <BotNavItem
-        label='New Transactions'
-        icon={<AddCircleIcon />}
-        href='/transactions/new'
       />
       <BotNavItem label='Planning' icon={<Savings />} />
       <BotNavItem label='Me' icon={<Person />} href='/me' />

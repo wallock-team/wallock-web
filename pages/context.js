@@ -1,6 +1,5 @@
 import React, { ContextType, createContext, useContext, useState, useEffect } from "react";
 import Api from "../lib/api/api";
-import Login from "./login";
 
 const AppContext = createContext()
 
@@ -19,7 +18,7 @@ function ContextProvider({ children }) {
       setUser(res.data)
     });
   }
-  
+
   const value = {
     user,
     refreshUser

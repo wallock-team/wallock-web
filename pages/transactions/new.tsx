@@ -26,7 +26,6 @@ import Api from 'lib/api/api'
 import withAuthPage from 'lib/auth/withAuthPage'
 import { CreateTransactionDto } from 'lib/types/transactions'
 import { Category } from 'lib/api/types'
-import { useAppContext } from '../context'
 
 type Props = {
   categories: Category[]
@@ -45,8 +44,6 @@ export const getServerSideProps = withAuthPage<Props>(async (context: any) => {
 const NewTransaction: NextPage<Props> = (props) => {
   const [isCreating, setCreating] = useState<boolean>(false)
   const router = useRouter()
-  const {refreshUser} = useAppContext()
-
   const api = Api.fromWeb()
 
   const formik = useFormik<CreateTransactionDto>({
@@ -57,7 +54,6 @@ const NewTransaction: NextPage<Props> = (props) => {
     onSubmit: async (values) => {
       setCreating(true)
       await api.transactions.add(values)
-      await refreshUser()
       setCreating(false)
       router.push('/transactions')
     },
