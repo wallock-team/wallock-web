@@ -16,24 +16,25 @@ const withAuthPage = <
   getServerSideProps?: GetServerSideProps<P, Q, D>
 ) => {
   return async function (context: GetServerSidePropsContext<Q, D>) {
+    try {
     const amILoggedInResponse = await axios.get('/auth/am-i-logged-in', {
       headers: {
         cookie: String(context.req.headers.cookie),
       },
     })
-    if (amILoggedInResponse.status === 200) {
-      return getServerSideProps
-        ? {
+      if (amILoggedInResponse.status === 200) {
+        return getServerSideProps
+          ? {
             ...(await getServerSideProps(context)),
-            
-            
           }
-        : {
+          : {
             props: {
               user: amILoggedInResponse.data,
             },
           }
-    } else {
+      }
+    }
+    catch (err) {
       return {
         redirect: {
           destination: '/login',
