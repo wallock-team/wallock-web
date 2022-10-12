@@ -70,7 +70,7 @@ const TransactionDetail: NextPage = (props) => {
             <ListItemAvatar>
               <NotesIcon />
             </ListItemAvatar>
-            <ListItemText primary={props.transaction.category.note} />
+            <ListItemText primary={props.transaction.note} />
           </ListItem>
         </List>
       </Container>

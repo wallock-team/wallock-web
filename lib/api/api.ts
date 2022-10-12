@@ -1,6 +1,7 @@
 import axios from 'axios'
 import CategoriesApi from './categories-api'
 import TransactionsApi from './transactions-api'
+import UserApi from './user-api'
 
 export default class Api {
   public static async fromServer(context: any) {
@@ -24,8 +25,10 @@ export default class Api {
     }
     this.transactions = new TransactionsApi(configuredAxios)
     this.categories = new CategoriesApi(configuredAxios)
+    this.user = new UserApi(configuredAxios)
   }
 
   public readonly transactions: TransactionsApi
   public readonly categories: CategoriesApi
+  public readonly user: UserApi
 }

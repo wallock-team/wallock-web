@@ -29,6 +29,7 @@ import {
   UpdateTransactionDto,
 } from 'lib/types/transactions'
 import { Category } from 'lib/api/types'
+import { useAppContext } from '../../context'
 
 type Props = {
   transactionToBeEdited: Transaction
@@ -54,6 +55,7 @@ const UpdateTransaction: NextPage<Props> = (props) => {
   const [isCreating, setCreating] = useState<boolean>(false)
   const router = useRouter()
   const api = Api.fromWeb()
+  let {refreshUser} = useAppContext()
 
   const formik = useFormik<UpdateTransactionDto>({
     initialValues: {
@@ -66,6 +68,7 @@ const UpdateTransaction: NextPage<Props> = (props) => {
     onSubmit: async (values) => {
       setCreating(true)
       await api.transactions.update(values)
+      await refreshUser()
       setCreating(false)
       router.push('/transactions')
     },

@@ -4,6 +4,7 @@ import { Button } from '@mui/material'
 import GoogleIcon from '@mui/icons-material/Google'
 
 import Logo from '../components/logo'
+import Api from '../lib/api/api'
 
 export const getStaticProps: GetStaticProps = async () => {
   return {
@@ -18,6 +19,7 @@ const Login: NextPage = ({
   baseUrl,
   backendBaseUrl,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const api = Api.fromWeb()
   return (
     <>
       <CenterPositioned>
@@ -28,15 +30,16 @@ const Login: NextPage = ({
         fullWidth
         variant='contained'
         startIcon={<GoogleIcon />}
-        onClick={redirectToGoogleLogin}
+        onClick={() => redirectToGoogleLogin}
       >
         Log in with Google
       </Button>
     </>
   )
 
-  function redirectToGoogleLogin() {
-    window.location.href = `${backendBaseUrl}/auth/login/social-login/google?authorized_uri=${baseUrl}`
+  const redirectToGoogleLogin = async () => {
+    await api.user.login()
+    //window.location.href = `${backendBaseUrl}/auth/login/social-login/google?authorized_uri=${baseUrl}`
   }
 }
 
