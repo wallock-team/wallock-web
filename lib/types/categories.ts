@@ -7,6 +7,12 @@ export type CreateCategoryDto = {
   group: string
 }
 
+export type UpdateCategoryDto = {
+  id: number
+  name?: string
+  group?: string
+}
+
 export type Category = BaseEntity & {
   name: string
   type: 'income' | 'expense'
