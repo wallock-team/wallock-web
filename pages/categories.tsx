@@ -80,7 +80,7 @@ const Categories: NextPage<PageProps> = (props) => {
                   .filter((category) => category.group === group)
                   .map((category) => (
                     <>
-                      <Link href={`categories/${category.id}`}>
+                      <Link key={category.id} href={`categories/${category.id}`}>
                         <ListItemButton key={category.id}>
                           <ListItemText primary={category.name} />
                         </ListItemButton>

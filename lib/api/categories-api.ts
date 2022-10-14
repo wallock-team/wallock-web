@@ -1,6 +1,6 @@
 import { Axios } from 'axios'
 import { CreateCategoryDto } from '../types/categories'
-import { Category } from './types'
+import { Category } from '../types/categories'
 
 export default class CategoriesApi {
   public constructor(private readonly axios: Axios) {}
@@ -28,6 +28,6 @@ export default class CategoriesApi {
   }
 
   public async getById(id: number) {
-    return await this.axios.get(`/categories/${id}`)
+    return (await this.axios.get<Category>(`/categories/${id}`)).data
   }
 }
