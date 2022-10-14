@@ -20,6 +20,10 @@ const Login: NextPage = ({
   backendBaseUrl,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const api = Api.fromWeb()
+  const redirectToGoogleLogin = async () => {
+    // await api.user.login()
+    window.location.href = `${backendBaseUrl}/auth/login/social-login/google?authorized_uri=${baseUrl}`
+  }
   return (
     <>
       <CenterPositioned>
@@ -30,17 +34,14 @@ const Login: NextPage = ({
         fullWidth
         variant='contained'
         startIcon={<GoogleIcon />}
-        onClick={() => redirectToGoogleLogin}
+        onClick={redirectToGoogleLogin}
       >
         Log in with Google
       </Button>
     </>
   )
 
-  const redirectToGoogleLogin = async () => {
-    await api.user.login()
-    //window.location.href = `${backendBaseUrl}/auth/login/social-login/google?authorized_uri=${baseUrl}`
-  }
+ 
 }
 
 const CenterPositioned = ({ children }: { children: ReactNode }) => {

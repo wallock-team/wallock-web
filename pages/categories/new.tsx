@@ -22,14 +22,15 @@ import { CreateCategoryDto } from 'lib/types/categories'
 import * as Yup from 'yup'
 import Api from 'lib/api/api'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
-
-export const getServerSideProps = withAuthPage()
+import { useEffect, useState } from 'react'
+import { useAppContext } from '../context';
+import useAuth from '../../lib/hooks/useAuath'
 
 const NewCategory = () => {
   const [isCreating, setCreating] = useState<boolean>(false)
   const router = useRouter()
   const api = Api.fromWeb()
+  useAuth()
 
   const formik = useFormik<CreateCategoryDto>({
     initialValues: {

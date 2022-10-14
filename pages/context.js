@@ -1,34 +1,46 @@
-import React, { ContextType, createContext, useContext, useState, useEffect } from "react";
-import Api from "../lib/api/api";
+import { useRouter } from 'next/dist/client/router'
+import React, {
+  ContextType,
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+} from 'react'
+import Api from '../lib/api/api'
 
 const AppContext = createContext()
 
 function ContextProvider({ children }) {
   let [user, setUser] = useState()
   const api = Api.fromWeb()
+  let route = useRouter()
 
   useEffect(() => {
-    api.user.get().then((res) => {
-      setUser(res.data)
-    });
-  },[])
+    console.log("in useEffect");
+    refreshUser()
+  }, [])
 
   const refreshUser = async () => {
-    await api.user.get().then((res) => {
-      setUser(res.data)
-    });
+    try {
+      let response = await api.user.get()
+      setUser(response.data)
+    } catch (err) {
+      if (err.response.status === 401) {
+        route.push('/login')
+      } else alert(err.message)
+    }
   }
 
   const value = {
     user,
-    refreshUser
+    refreshUser,
   }
 
-  return <AppContext.Provider value={value}> {children}</AppContext.Provider>;
+  return <AppContext.Provider value={value}> {children}</AppContext.Provider>
 }
 
 function useAppContext() {
-    return useContext(AppContext)
+  return useContext(AppContext)
 }
 
-export { AppContext, ContextProvider, useAppContext };
+export { AppContext, ContextProvider, useAppContext }

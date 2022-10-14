@@ -31,7 +31,7 @@ const BotNav = () => (
       <BotNavItem
         label='Transactions'
         icon={<AccountBalanceWallet />}
-        href='/transactions'
+        href='/categories/new'
       />
       <BotNavItem
         label='New Transactions'
