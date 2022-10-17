@@ -1,9 +1,16 @@
 import { ReactNode } from 'react'
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next'
-import { Button } from '@mui/material'
+import {
+  Box,
+  Button,
+  Container,
+  Divider,
+  TextField,
+  Typography,
+} from '@mui/material'
 import GoogleIcon from '@mui/icons-material/Google'
-
-import Logo from '../components/logo'
+import Image from 'next/image'
+import logoSvg from 'public/branding/logo.svg'
 
 export const getStaticProps: GetStaticProps = async () => {
   return {
@@ -20,18 +27,34 @@ const Login: NextPage = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
-      <CenterPositioned>
-        <Logo />
-      </CenterPositioned>
+      <Container maxWidth='sm' sx={{ mt: '10vh' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 2,
+          }}
+        >
+          <Image src={logoSvg} alt="Wallock's logo" height={40} />
 
-      <Button
-        fullWidth
-        variant='contained'
-        startIcon={<GoogleIcon />}
-        onClick={redirectToGoogleLogin}
-      >
-        Log in with Google
-      </Button>
+          <Button
+            fullWidth
+            variant='contained'
+            startIcon={<GoogleIcon />}
+            onClick={redirectToGoogleLogin}
+          >
+            Log in with Google
+          </Button>
+
+          <Divider>or</Divider>
+
+          <TextField disabled label='Email' />
+          <TextField disabled label='Password' type='password' />
+          <Button fullWidth variant='contained' disabled>
+            Login (Coming soon)
+          </Button>
+        </Box>
+      </Container>
     </>
   )
 
