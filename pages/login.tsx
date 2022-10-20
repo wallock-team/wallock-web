@@ -15,8 +15,8 @@ import logoSvg from 'public/branding/logo.svg'
 export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
-      baseUrl: process.env.BASE_URL,
-      backendBaseUrl: process.env.BACKEND_BASE_URL,
+      baseUrl: process.env.WEB_URL,
+      backendBaseUrl: process.env.SERVER_URL,
     },
   }
 }
